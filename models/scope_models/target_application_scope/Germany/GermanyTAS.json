@@ -1,0 +1,19 @@
+{
+  "coordinates": {
+    "min_coordinates": [0, 0],
+    "max_coordinates": [0, 0]
+  },
+  "set_of_signs": [],
+  "available_years": [],
+  "road_types": [],
+  "temperature": {
+    "min_temp": 0,
+    "max_temp": 10,
+    "units": "C"
+  },
+  "velocity": {
+    "min_velocity": 0,
+    "max_velocity": 130,
+    "units": "km/hr"
+  }
+}
