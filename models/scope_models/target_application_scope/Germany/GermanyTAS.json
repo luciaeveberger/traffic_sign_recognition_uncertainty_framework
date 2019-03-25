@@ -1,4 +1,5 @@
 {
+  "country":"Germany",
   "coordinates": {
     "min_coordinates": [0, 0],
     "max_coordinates": [0, 0]
@@ -15,5 +16,7 @@
     "min_velocity": 0,
     "max_velocity": 130,
     "units": "km/hr"
-  }
+  },
+  "driving_direction": "right",
+
 }
