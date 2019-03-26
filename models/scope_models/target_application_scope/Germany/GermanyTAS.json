@@ -17,6 +17,5 @@
     "max_velocity": 130,
     "units": "km/hr"
   },
-  "driving_direction": "right",
-
+  "driving_direction": "right"
 }
