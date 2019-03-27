@@ -6,7 +6,7 @@ class ImageBased():
         self.driving_direction = driving_direction
 
     def validSignType(self, sign_type):
-        return True
+        return 1
 
     def validDrivingDirection(self, driving_direction):
-        return True
+        return 1
