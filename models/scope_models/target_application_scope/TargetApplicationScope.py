@@ -20,3 +20,18 @@ class TargetApplicationScope:
     def get_country(self):
         return self.country
 
+    def get_set_of_sign(self):
+        return self.set_of_signs
+
+    def get_road_types(self):
+        return self.road_types
+
+    def get_temperature_contraints(self):
+        return self.temperature
+
+    def get_velocity_contrainsts(self):
+        return self.velocity
+
+    def get_driving_direction(self):
+        return self.driving_direction
+
