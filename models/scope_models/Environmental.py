@@ -5,7 +5,6 @@ class Environmental:
         self.temperature = temperature
         self.rain_sensor_reading = rain_sensor_reading
 
-
     ## need to be transformed to be distributions/sampling from historical readings
 
     def validTemperature(self, timestamp, coordinates, temperature):
