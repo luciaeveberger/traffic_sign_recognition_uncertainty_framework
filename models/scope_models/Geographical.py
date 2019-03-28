@@ -41,6 +41,5 @@ class Geographical:
         return self.verify_coordinates() + self.verify_road_type() + self.verify_velocity()
 
 
-
 g = Geographical([52.548742971495,1.81602098644987], "highway", 100)
-print(g.verify_geographical_parameters())
+#print(g.verify_geographical_parameters())
