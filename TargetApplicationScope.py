@@ -1,9 +1,13 @@
 import json
-path = "/Users/luciaeve/Documents/EMSE/KAISERSLAUTERN/THESIS/code/tsr_uncertainy_framework/models/scope_models/target_application_scope/Germany/"
+import os.path
+
+abs_path = os.path.abspath(os.path.dirname(__file__))
+file_path = os.path.join(abs_path, "target_application_scope/Germany/GermanyTAS.json")
+
 
 class TargetApplicationScope:
     def __init__(self):
-        with open(path + 'GermanyTAS.json') as json_data:
+        with open(file_path) as json_data:
             d = json.load(json_data)
             self.country = d['country']
             self.coordinates = d['coordinates']
@@ -13,6 +17,7 @@ class TargetApplicationScope:
             self.temperature = d['temperature']
             self.velocity = d['velocity']
             self.driving_direction = d['driving_direction']
+            self.time_frame = d['years']
 
     def get_velocity(self):
         return self.velocity
@@ -35,3 +40,7 @@ class TargetApplicationScope:
     def get_driving_direction(self):
         return self.driving_direction
 
+
+
+t = TargetApplicationScope()
+print(t.get_country())

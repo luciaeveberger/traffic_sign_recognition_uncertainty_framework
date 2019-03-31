@@ -12,7 +12,7 @@ class ImageBased():
     def verify_driving_direction(self, driving_direction):
         return 1
 
-    def verify_geographical_parameters(self):
+    def verify_image_based_parameters(self):
         """ returns final geographical score """
         factor_eval = 100/self.parameters
         return (factor_eval * (self.verify_sign_type()

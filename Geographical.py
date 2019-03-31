@@ -1,5 +1,5 @@
 import requests
-from target_application_scope import TargetApplicationScope
+import TargetApplicationScope
 import json
 
 
@@ -9,6 +9,7 @@ velocity_constraint = t.get_velocity()
 country_constraint = t.get_country()
 
 url = "https://nominatim.openstreetmap.org/reverse?format=" + output_format
+
 
 class Geographical:
     def __init__(self, coordinates, road_type, velocity):

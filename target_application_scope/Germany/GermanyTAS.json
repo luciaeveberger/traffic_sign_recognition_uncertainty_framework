@@ -12,10 +12,12 @@
     "max_temp": 10,
     "units": "C"
   },
+  "rain_sensor": {},
   "velocity": {
     "min_velocity": 0,
     "max_velocity": 130,
     "units": "km/hr"
   },
-  "driving_direction": "right"
+  "driving_direction": "right",
+  "years": {"start":"", "end": ""}
 }
