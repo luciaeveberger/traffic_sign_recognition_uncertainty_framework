@@ -1,46 +1,33 @@
 import pandas as pd
 import numpy as np
+import requests
+import json
 
-import sys
-sys.path.append("..")
-import TargetApplicationScope
-
-## defines the parameter ranges we should be looking for
-t = TargetApplicationScope.TargetApplicationScope()
-lookup_table = t.__dict__
-appropriate_test_cases = 5
-
-def return_min_max(column):
-    """ returns the max & min on column [min, max]"""
-    return [min(column), max(column)]
-
-def check_range(tas_parms, column):
-    min_max = return_min_max(column)
-    for key in tas_parms:
-        if "min" in key:
-            print(tas_parms[key])
-            if tas_parms[key] >= min_max[0]:
-                print("YAY")
-        if "max" in key:
-            if tas_parms[key] <= min_max[1]:
-                print("YAY")
-
-    ## may check regular distribution
-    ## check that the tas_params are less than the column values
-    return
+url = "https://elevation-api.io/api/elevation?points="
 
 
 def generate_dataset(file_path):
+    print("GENERATING COORDINATES DATA")
     df = pd.read_csv(file_path)
 
     # Geographical Elements
-    df['Latitude'] = np.random.uniform(30, 50, df.shape[0])
-    df['Longitude'] = np.random.uniform(0, 50, df.shape[0])
-    df['Altitude'] = np.random.uniform(-500,  2962, df.shape[0])
+    df['Latitude'] = np.random.uniform(46, 55, df.shape[0])
+    df['Longitude'] = np.random.uniform(6, 14, df.shape[0])
+    df['Coordinates'] = tuple(zip(df['Latitude'], df['Longitude']))
+
+    print("GENERATING ELEVATION/ALTITUDE DATA")
+    elevations = calculate_elevations(df)
+    print("ELEVATION DATA FINISHED")
+
+
+    df['Elevation'] = elevations
+
+    print("DATETIME DATA")
     df['Datetime'] = np.random.randint(1459138574, 1553746574, df.shape[0])
     df['Speed'] = np.random.uniform(0,130, df.shape[0])
 
-    # Environmental Elements
+    # Environmental Elements -> need to do some sampling
+    df['Temperature'] =  np.random.uniform(-20,  35, df.shape[0])
 
     # ImageBased Elements
     return df
@@ -65,3 +52,23 @@ def validate_params(data):
     time_params = lookup_table['available_years']
 
     return
+
+def calculate_elevations(df):
+    """
+    uses the elevation API to calculate the elevations based on the
+    coordinates
+
+    :param df:
+    :return: [] list of altitudes
+    """
+    elevations = list()
+
+    for k,g in df.groupby(np.arange(len(df))//10):
+        response_body = ""
+        for element in g['Coordinates']:
+            response_body = response_body + str(element).replace(" ", "") + ","
+        response = json.loads(requests.get(url + response_body).text)['elevations']
+        for index in range(len(response)):
+            elevations.append(response[index]['elevation'])
+
+    return elevations
