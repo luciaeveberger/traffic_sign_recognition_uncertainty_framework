@@ -8,8 +8,8 @@
   "available_years": [],
   "road_types": [],
   "temperature": {
-    "min_temp": 0,
-    "max_temp": 10,
+    "min_temp": -20,
+    "max_temp": 35,
     "units": "C"
   },
   "rain_sensor": {},
@@ -17,6 +17,11 @@
     "min_velocity": 0,
     "max_velocity": 130,
     "units": "km/hr"
+  },
+  "elevation": {
+    "min_elevation": -3.54,
+    "max_elevation": 2963,
+    "units": "m"
   },
   "driving_direction": "right",
   "years": {"min_date":"", "max_date": ""}

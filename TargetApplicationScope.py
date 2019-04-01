@@ -18,6 +18,7 @@ class TargetApplicationScope:
             self.velocity = d['velocity']
             self.driving_direction = d['driving_direction']
             self.time_frame = d['years']
+            self.elevation = d['elevation']
 
     def get_velocity(self):
         return self.velocity

@@ -32,26 +32,6 @@ def generate_dataset(file_path):
     # ImageBased Elements
     return df
 
-def validate_params(data):
-    """
-     Range-based:
-    + coordinateRange(coordinates, max_coordinate, min_coordinate)
-    + temperatureRange(temperature, min_temp, max_temp):
-    + yearRange(year, timestamp)
-    + velocityRange(min_velocity, max_velocity)
-    + rainSensorRange(min_rain, max_rain)
-    """
-    #  + velocityRange(min_velocity, max_velocity)
-    velocity_data = data['Speed']
-    velocity_params = lookup_table['velocity']
-    check_range(velocity_params, velocity_data )
-
-    temp_params = lookup_table['temperature']
-    check_range(velocity_params, velocity_data )
-
-    time_params = lookup_table['available_years']
-
-    return
 
 def calculate_elevations(df):
     """
@@ -72,3 +52,5 @@ def calculate_elevations(df):
             elevations.append(response[index]['elevation'])
 
     return elevations
+
+
