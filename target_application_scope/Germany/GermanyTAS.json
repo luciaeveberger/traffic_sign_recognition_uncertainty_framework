@@ -19,5 +19,5 @@
     "units": "km/hr"
   },
   "driving_direction": "right",
-  "years": {"start":"", "end": ""}
+  "years": {"min_date":"", "max_date": ""}
 }
