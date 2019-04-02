@@ -23,7 +23,7 @@ def generate_dataset(file_path):
     df['Elevation'] = elevations
 
     print("DATETIME DATA")
-    df['Datetime'] = np.random.randint(1459138574, 1553746574, df.shape[0])
+    df['Datetime'] = np.random.randint(1522674299, 1553746574, df.shape[0])
     df['Speed'] = np.random.uniform(0,130, df.shape[0])
 
     # Environmental Elements -> need to do some sampling
