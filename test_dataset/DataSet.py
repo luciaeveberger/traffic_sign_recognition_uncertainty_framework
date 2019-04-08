@@ -12,7 +12,7 @@ def generate_dataset(file_path):
 
     # Geographical Elements
     df['Latitude'] = np.random.uniform(46, 55, df.shape[0])
-    df['Longitude'] = np.random.uniform(6, 14, df.shape[0])
+    df['Longitude'] = np.random.uniform(6, 15, df.shape[0])
     df['Coordinates'] = tuple(zip(df['Latitude'], df['Longitude']))
 
     print("GENERATING ELEVATION/ALTITUDE DATA")
