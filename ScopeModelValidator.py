@@ -21,9 +21,11 @@ class ScopeModelValidator:
         # self.environmental = Environmental.Environmental(timestamp, temperature, lat, long, rain_sensor)
         self.geographical = Geographical.Geographical(coordinates, road_type, velocity)
         self.img_based_measures = ImageBased.ImageBased(sign_type, "right")
+        self.params = 3
 
     def calculate_scope(self):
-        compiled_score = self.geographical.verify_geographical_parameters() + self.img_based_measures.verify_image_based_parameters()
+        compiled_score = (self.geographical.verify_geographical_parameters() + \
+                         self.img_based_measures.verify_image_based_parameters()) / self.params
         return compiled_score
 
 
@@ -31,19 +33,17 @@ df = pd.read_csv(data_file_path)
 
 # to make the coordinates easier to use
 df['Coordinates_Joined'] = list(zip(df.Longitude, df.Latitude))
+df['Scope_Score'] = 0
 
-s = ScopeModelValidator(timestamp=df['Datetime'][5],
-                        temperature=df['Temperature'][5],
-                        coordinates=df['Coordinates_Joined'][5],
-                        sign_type=df['ClassId'][5],
+
+s = ScopeModelValidator(timestamp=df.Datetime[5],
+                        temperature=df.Temperature[5],
+                        coordinates=df.Coordinates_Joined[5],
+                        sign_type=df.ClassId[5],
                         road_type="highway",
-                        velocity=df['Speed'][5],
+                        velocity=df.Speed[5],
                         rain_sensor=0
                         )
-print(s.calculate_scope())
+df.Scope_Score[5] = s.calculate_scope()
 
-
-# for all the points
-# for index, row in df.iterrows():
-#     s =  ScopeModelValidator(row['Datetime'],
 
