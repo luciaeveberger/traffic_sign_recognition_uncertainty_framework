@@ -2,8 +2,7 @@ class Environmental:
     # need to see if we need to check the other params
     def __init__(self,
                  timestamp,
-                 lat,
-                 long
+                 coordinates
                  temperature_sensor,
                  rain_sensor
                  #temperature_forecast,

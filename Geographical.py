@@ -53,7 +53,6 @@ class Geographical:
 
     def verify_velocity(self):
         ## @toDo based on place?
-        print(self.velocity)
         if self.velocity >= velocity_constraint['min_velocity']  \
                 and self.velocity <= velocity_constraint['max_velocity']:
             return 1
@@ -67,24 +66,3 @@ class Geographical:
                                + self.verify_road_type()
                                + self.verify_velocity())
                 )/100
-
-
-
-# (54.48086620605899, 7.578818052368505)
-
-## in UK
-# g = Geographical(54.48,
-#                  7.57, "highway", 100)
-# print(g.verify_geographical_parameters())
-# #
-# # ## in Germany
-#
-#
-# g = Geographical([52.52,
-#                   13.404954], "highway", 100)
-# print(g.verify_geographical_parameters())
-#
-# ## over speed limit
-# g = Geographical([52.52,
-#                   13.404954], "highway", -100)
-# print(g.verify_geographical_parameters())
