@@ -4,7 +4,7 @@ TSR: Traffic Sign Recognition Framework Code
 # 5_2_1.Scope Model 
 
 # 5_2_2 Dataset Sufficiency & Representativeness
-![alt text] (/blob/master/design_figures/analyze_representativeness_sufficiency.png title="Dataset sufficiency") 
+![data sufficiency](https://github.com/luciaeveberger/tsr_uncertainy_framework/blob/master/design_figures/analyze_representativeness_sufficiency.png) 
 
 
 ## Weather Profiling 
