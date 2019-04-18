@@ -36,12 +36,12 @@ df['Coordinates_Joined'] = list(zip(df.Longitude, df.Latitude))
 df['Scope_Score'] = 0
 
 
-s = ScopeModelValidator(timestamp=df.Datetime[5],
-                        temperature=df.Temperature[5],
-                        coordinates=df.Coordinates_Joined[5],
-                        sign_type=df.ClassId[5],
+s = ScopeModelValidator(timestamp=df.Datetime[6],
+                        temperature=df.Temperature[6],
+                        coordinates=df.Coordinates_Joined[6],
+                        sign_type=df.ClassId[6],
                         road_type="highway",
-                        velocity=df.Speed[5],
+                        velocity=df.Speed[6],
                         rain_sensor=0
                         )
 df.Scope_Score[5] = s.calculate_scope()
