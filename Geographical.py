@@ -8,8 +8,8 @@ t = TargetApplicationScope.TargetApplicationScope()
 velocity_constraint = t.get_velocity()
 country_constraint = t.get_country()
 
-#url = "https://nominatim.openstreetmap.org/reverse?format=" + output_format
-url = "http://188.40.207.242/nominatim/reverse?format=jsonv2"
+
+url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2"
 
 
 class Geographical:
