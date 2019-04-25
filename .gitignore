@@ -106,3 +106,6 @@ venv.bak/
 
 # idea
 .idea/
+
+## ignore large weather files
+test_dataset/weather_data/
