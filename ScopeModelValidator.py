@@ -1,11 +1,8 @@
-import pandas as pd
-
 # @todo: figure out what is needed for environmental
 import Environmental
 import Geographical
 import ImageBased
 
-data_file_path = "test_dataset/data/generated_data.csv"
 
 
 class ScopeModelValidator:
@@ -18,7 +15,6 @@ class ScopeModelValidator:
                  road_type,
                  velocity,
                  rain_sensor):
-
 
         self.geographical = Geographical.Geographical(coordinates,
                                                       road_type,
@@ -38,31 +34,3 @@ class ScopeModelValidator:
                           ) / self.params
         return compiled_score
 
-
-df = pd.read_csv(data_file_path)
-# to make the coordinates easier to use
-df['Coordinates_Joined'] = list(zip(df.Longitude, df.Latitude))
-df['Scope_Score'] = 0
-
-# can replace the scope column
-s = ScopeModelValidator(timestamp=df.Datetime[6],
-                        temperature=df.Temperature[6],
-                        coordinates=df.Coordinates_Joined[6],
-                        sign_type=df.ClassId[6],
-                        road_type="highway",
-                        velocity=df.Speed[6],
-                        rain_sensor=0
-                        )
-
-print(s.calculate_scope())
-
-s2 = ScopeModelValidator(timestamp=df.Datetime[3],
-                        temperature=df.Temperature[3],
-                        coordinates=df.Coordinates_Joined[3],
-                        sign_type=df.ClassId[3],
-                        road_type="highway",
-                        velocity=df.Speed[3],
-                        rain_sensor=0
-                        )
-
-print(s2.calculate_scope())

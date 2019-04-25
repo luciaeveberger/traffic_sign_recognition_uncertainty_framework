@@ -3,9 +3,10 @@ import numpy as np
 import requests
 import json
 import time
-from datetime import datetime
+import os
 
 
+## endpoints to gather data
 url = "https://elevation-api.io/api/elevation?points="
 json_file_path = "data/data_lookup_params.json"
 loc_url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2"
@@ -36,48 +37,25 @@ def generate_dataset(file_path):
         print("DATETIME DATA")
         df['Datetime'] = np.random.randint(d['datetime'][0], d['datetime'][1], df.shape[0])
         df['formattedTime'] = pd.to_datetime(df['Datetime'], unit='s')
-
         df['month'] = pd.to_datetime(df['formattedTime']).dt.strftime('%m')
-
-        temperature_generator = list()
-        precipitation_generator = list()
-
-        count = 0
-        for month in df['month']:
-            for event in d['temp']:
-                if month == event:
-                    temperature_generator.append(
-                        np.random.uniform(d['temp'][event][0], d['temp'][event][1]))
-                    precipitation_generator.append(
-                        np.random.uniform(d['precip'][event][0], d['precip'][event][1]))
-                # adds random noise
-                if count % 550:
-                    temperature_generator.append(40)
-                    precipitation_generator.append(120)
-
-        df['Temperature'] = temperature_generator
-        df['Precipitation'] = precipitation_generator
+        environ_dict = d['environmental']
+        # generates data based on monthly high and low from recent sources
+        temperature_lists = generate_environmental_data(df, environ_dict)
+        df['Temperature'] = temperature_lists[0]
+        df['Precipitation'] = temperature_lists[1]
 
     # profiles based on the randomized data
     print("ELEVATION DATA GENERATING")
-    #df['Elevation'] = calculate_elevations(df)
-
-    print("ELEVATION DATA GENERATING")
+    df['Elevation'] = calculate_elevations(df)
 
     print("GENERATING GEOGRAPHICAL PROFILE & RoadType")
     df['Open_Data'] = calculate_open_data(df)
-    #
-    # # elevations generated
-    #
-    # df['Speed'] = np.random.uniform(0,130, df.shape[0])
-    #
-    # # @toDO: refine temperature & precipitation profiles
-    # print("TEMPERATURE SAMPLING")
-    #
-    #
-    # # Environmental Elements -> need to do -> based on high and low on those months
-    # df['Temperature'] = np.random.uniform(-20,  35, df.shape[0])
-    # df['Precipitation'] = np.random.uniform(0, 20, df.shape[0])
+
+    df['RoadTypes'] = get_road_types(df)
+
+    # # @toDO: define on road_type
+    df['Speed'] = np.random.uniform(0,130, df.shape[0])
+
 
     # ImageBased Elements
     df.to_csv("data/generated_data1.csv")
@@ -130,6 +108,42 @@ def calculate_elevations(df):
     return elevations
 
 
-generate_dataset("data/base_test_data.csv")
+def generate_environmental_data(df, monthly_enviro_dict):
+    temperature_generator = list()
+    precipitation_generator = list()
+    count = 0
+    for month in df['month']:
+        for event in monthly_enviro_dict['temp']:
+            if month == event:
+                temperature_generator.append(
+                    np.random.uniform(monthly_enviro_dict['temp'][event][0], monthly_enviro_dict['temp'][event][1]))
+                precipitation_generator.append(
+                    np.random.uniform(monthly_enviro_dict['precip'][event][0], monthly_enviro_dict['precip'][event][1]))
+            # adds random noise
+            if count % 550:
+                temperature_generator.append(40)
+                precipitation_generator.append(120)
+    return temperature_generator, precipitation_generator
+
+
+def get_road_types(df):
+    road_types = list()
+    for index, row in df.iterrows():
+        road_type = json.loads(row['Open_Data']).get('addresstype')
+        if not road_type:
+            road_type = "unknown"
+        road_types.append(road_type)
+    return road_types
+
+
+if not os.path.isfile("data/generated_data1.csv"):
+    generate_dataset("data/base_test_data.csv")
+
+# df = pd.read_csv("data/generated_data1.csv")
+# df['Speed'] = np.random.uniform(0,130, df.shape[0])
+# df['Elevation'] = calculate_elevations(df)
+# df.to_csv("data/generated_data1.csv")
+
+
 
 

@@ -18,7 +18,7 @@ class Geographical:
                  road_type,
                  velocity):
         self.coordinates = coordinates
-        self.road_types = road_type
+        self.road_type = road_type
         self.velocity = velocity
         self.parameters = 3
 
@@ -34,14 +34,13 @@ class Geographical:
 
 
         r = requests.get(revised_url)
-        print(r.text)
+        print(json.loads(r.text)["address"]['country'])
         # @todo for 400
         coordinates_country = json.loads(r.text)["address"]['country']
         if coordinates_country == country_constraint:
             return 1
         else:
             return 0
-        #return
 
     def verify_road_type(self):
         ### chategory type => can parse from here
@@ -49,15 +48,16 @@ class Geographical:
         """
         :return:
         """
-        return 1
+        if self.road_type in t.get_road_types():
+            return 1
+        return 0
 
     def verify_velocity(self):
-        ## @toDo based on place?
-        if self.velocity >= velocity_constraint['min_velocity']  \
-                and self.velocity <= velocity_constraint['max_velocity']:
+        if velocity_constraint['min_velocity'] <= \
+                self.velocity  \
+                <= velocity_constraint['max_velocity']:
             return 1
-        else:
-            return 0
+        return 0
 
     def verify_geographical_parameters(self):
         """ returns final geographical score """

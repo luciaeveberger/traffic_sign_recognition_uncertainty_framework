@@ -1,4 +1,3 @@
-## import global SignTypes list
 import TargetApplicationScope
 
 t = TargetApplicationScope.TargetApplicationScope()
