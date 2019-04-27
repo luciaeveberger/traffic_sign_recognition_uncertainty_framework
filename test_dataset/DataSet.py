@@ -139,11 +139,6 @@ def get_road_types(df):
 if not os.path.isfile("data/generated_data1.csv"):
     generate_dataset("data/base_test_data.csv")
 
-# df = pd.read_csv("data/generated_data1.csv")
-# df['Speed'] = np.random.uniform(0,130, df.shape[0])
-# df['Elevation'] = calculate_elevations(df)
-# df.to_csv("data/generated_data1.csv")
-
 
 
 
