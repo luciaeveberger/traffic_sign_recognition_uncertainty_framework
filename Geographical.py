@@ -22,12 +22,23 @@ class Geographical:
         self.velocity = velocity
         self.parameters = 3
 
+
+    def verify_lat(self):
+        # @todo: based on the border
+        return
+
+    def verify_long(self):
+        # @todo: based on the border
+        return
+
     def verify_coordinates(self):
         """
             input: coordinates list, [0] Long, [1] Lat
             reverse geo-coding to check if coordinates are contained
             parses API message
          """
+        # call child methods here
+
 
         revised_url = \
             url + "&lat=" + str(self.coordinates[1]) + "&lon=" + str(self.coordinates[0])
@@ -62,7 +73,10 @@ class Geographical:
     def verify_geographical_parameters(self):
         """ returns final geographical score """
         factor_eval = 100/self.parameters
-        return (factor_eval * (self.verify_coordinates()
-                               + self.verify_road_type()
-                               + self.verify_velocity())
-                )/100
+        probability = self.verify_coordinates() \
+                      *(factor_eval * (self.verify_coordinates()
+                                       + self.verify_road_type()
+                                       + self.verify_velocity())
+                        )/100
+        print(probability)
+        return probability

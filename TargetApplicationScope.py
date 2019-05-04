@@ -19,6 +19,7 @@ class TargetApplicationScope:
             self.driving_direction = d['driving_direction']
             self.time_frame = d['years']
             self.elevation = d['elevation']
+            self.environmental_stats = d['environmental_stats']
 
     def get_velocity(self):
         return self.velocity
@@ -40,6 +41,10 @@ class TargetApplicationScope:
 
     def get_driving_direction(self):
         return self.driving_direction
+
+    def get_environmental_stat(self):
+        return self.environmental_stats
+
 
 
 
