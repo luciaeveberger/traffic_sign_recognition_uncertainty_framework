@@ -25,3 +25,4 @@ Master Thesis with Fraunhofer IESE.
 ## Weather Profiling 
 
 # 5_2_3_ Scope Compliancy Model
+--adds compounding function to account for how many signs will change in Germany.
