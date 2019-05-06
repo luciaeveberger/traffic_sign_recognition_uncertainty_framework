@@ -16,10 +16,12 @@ class Geographical:
     def __init__(self,
                  coordinates,
                  road_type,
-                 velocity):
+                 velocity,
+                 location_data):
         self.coordinates = coordinates
         self.road_type = road_type
         self.velocity = velocity
+        self.location_dict = location_data
         self.parameters = 3
 
 
@@ -39,26 +41,31 @@ class Geographical:
          """
         # call child methods here
 
+        if self.location_dict:
+            open_data_country = json.loads(self.location_dict)
+            #print(open_data_country['address']['country'])
+        else:
+            revised_url = \
+                url + "&lat=" + str(self.coordinates[1]) + "&lon=" + str(self.coordinates[0])
+            r = requests.get(revised_url)
+            if 200 <= r.status_code <= 299:
+                open_data_country = json.loads(r.text)
+            else:
+                return 0
+        return self.parse_country_dictionary(open_data_country, tas_country=country_constraint)
 
-        revised_url = \
-            url + "&lat=" + str(self.coordinates[1]) + "&lon=" + str(self.coordinates[0])
-
-
-        r = requests.get(revised_url)
-        if 200 <= r.status_code <= 299:
-            coordinates_country = json.loads(r.text)
-            address = coordinates_country.get('address')
-            if address:
-                sample_country =address.get('country')
-                print("LOCATION {}:{}".format(sample_country, country_constraint))
-                if sample_country == country_constraint:
-                    return 1
-                else:
-                    return 0
+    def parse_country_dictionary(self, open_data_dict, tas_country):
+        address = open_data_dict.get('address')
+        if address:
+            sample_country= address.get('country')
+            print("LOCATION {}:{}".format(sample_country, tas_country))
+            if sample_country == tas_country:
+                return 1
             else:
                 return 0
         else:
             return 0
+
 
     def verify_road_type(self):
         ### chategory type => can parse from here

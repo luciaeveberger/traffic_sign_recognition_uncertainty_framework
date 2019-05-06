@@ -4,7 +4,7 @@ import TargetApplicationScope
 t = TargetApplicationScope.TargetApplicationScope()
 environmental_stats = t.get_environmental_stat()
 air_temp = environmental_stats['air_temp']
-p_value = 0.05
+p_value = 0.001
 
 class Environmental:
     # need to see if we need to check the other params
@@ -13,7 +13,8 @@ class Environmental:
                  month_stamp,
                  coordinates,
                  temperature_sensor,
-                 rain_sensor):
+                 rain_sensor
+                 ):
         self.timestamp = timestamp
         self.month_date = month_stamp
         self.coordinates = coordinates
@@ -26,7 +27,6 @@ class Environmental:
         """ checks the value is larger than p_value """
         subset = air_temp.get(str(self.month_date))
         temp = int(self.temperature)
-
         probability = 0
         for val in subset:
             if val[0] == temp:
