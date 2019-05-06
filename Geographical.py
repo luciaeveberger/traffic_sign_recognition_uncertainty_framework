@@ -45,11 +45,18 @@ class Geographical:
 
 
         r = requests.get(revised_url)
-        print(json.loads(r.text)["address"]['country'])
-        # @todo for 400
-        coordinates_country = json.loads(r.text)["address"]['country']
-        if coordinates_country == country_constraint:
-            return 1
+        if 200 <= r.status_code <= 299:
+            coordinates_country = json.loads(r.text)
+            address = coordinates_country.get('address')
+            if address:
+                sample_country =address.get('country')
+                print("LOCATION {}:{}".format(sample_country, country_constraint))
+                if sample_country == country_constraint:
+                    return 1
+                else:
+                    return 0
+            else:
+                return 0
         else:
             return 0
 
@@ -72,11 +79,8 @@ class Geographical:
 
     def verify_geographical_parameters(self):
         """ returns final geographical score """
-        factor_eval = 100/self.parameters
-        probability = self.verify_coordinates() \
-                      *(factor_eval * (self.verify_coordinates()
-                                       + self.verify_road_type()
-                                       + self.verify_velocity())
-                        )/100
-        print(probability)
+        #factor_eval = 100/self.parameters
+        probability = self.verify_coordinates() * \
+                      self.verify_road_type() * \
+                      self.verify_velocity()
         return probability

@@ -49,4 +49,3 @@ class TargetApplicationScope:
 
 
 t = TargetApplicationScope()
-print(t.get_country())
