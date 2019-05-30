@@ -6,7 +6,10 @@ import numpy as np
 
 import ScopeModelValidator
 
-data_file_path = "test_dataset/data/generated_data1.csv"
+
+
+annoted_test_path = "/Users/luciaeve/Documents/EMSE/KAISERSLAUTERN/" \
+                    "THESIS/code/CompiledCode/TSD/DT_PROTOTYPE/scope_annotated_data.csv"
 data_output = "scope_model_results.csv"
 
 def compile_scope_probabilites(df_sampled):
@@ -14,6 +17,7 @@ def compile_scope_probabilites(df_sampled):
     df_sampled['geo_probability '] = 0
     df_sampled['Scope_Probability_Verbose'] = ""
     df_sampled['Scope_Probability'] = 0.00
+    df_sampled['RoadTypes'] = "road"
 
     location_data = ""
     for i, row in df_sampled.iterrows():
@@ -23,9 +27,9 @@ def compile_scope_probabilites(df_sampled):
                                                     month_stamp=row.month,
                                                     temperature=row.Temperature,
                                                     coordinates=row.Coordinates_Joined,
-                                                    sign_type=row.ClassId,
+                                                    sign_type=1,
                                                     road_type=row.RoadTypes,
-                                                    velocity=row.Speed,
+                                                    velocity=row.velocity,
                                                     rain_sensor=4,
                                                     location_data=location_data
                                                     )
@@ -42,10 +46,11 @@ def compile_scope_probabilites(df_sampled):
     return df_sampled
 
 
+
 if __name__ == '__main__':
-    df = pd.read_csv(data_file_path)
+    df = pd.read_csv(annoted_test_path)
+    print(df.columns)
     df['Coordinates_Joined'] = list(zip(df.Longitude, df.Latitude))
     print("Actual size {}".format(len(df)))
-    sample = df.head(10000)
-    scope_probabilities_df = compile_scope_probabilites(sample)
-    scope_probabilities_df.to_csv(data_output)
+    scope_probabilities_df = compile_scope_probabilites(df)
+    scope_probabilities_df.to_csv(data_output, index=False)
