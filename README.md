@@ -1,7 +1,5 @@
 # Traffic Sign Recognition Framework
-TSR: Traffic Sign Recognition Framework Code
-
-Master Thesis: Lucia Eve Berger
+Traffic Sign Recognition Framework Code with Master Thesis by Lucia Eve Berger
 
 # Code: 
 
@@ -39,7 +37,7 @@ The script will set the labels.
 2.	Different approaches are contained in the script (random forest, etc)
 3.	Requires a GPU for the random forest traini
 
-# Research Questions : 
+
 
 ## Scope Model: 
 
@@ -51,14 +49,5 @@ The script will set the labels.
 
 
 # 5_2_1.Scope Model 
-
+The Scope Model is an object oriented composition.
 ![scope_model](https://github.com/luciaeveberger/tsr_uncertainy_framework/blob/master/design_figures/scope_model.png) 
-
-# 5_2_2 Dataset Sufficiency & Representativeness
-![data sufficiency](https://github.com/luciaeveberger/tsr_uncertainy_framework/blob/master/design_figures/analyze_representativeness_sufficiency.png) 
-
-
-## Weather Profiling 
-
-# 5_2_3_ Scope Compliancy Model
---adds compounding function to account for how many signs will change in Germany.
