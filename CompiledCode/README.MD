@@ -1,10 +1,11 @@
-# Cod Structure
+# Code Structure
 
 This project is made to satify the requirments of the EMSE (European Master in Software Engineering). The project is divided in several modules. These are the 
 1) SCOPE_MODEL
 2) RECOGNITION_COMPONENT 
 3) QUALITY_MODEL
-4) The TSD (Traffic Sign Data) and input data contain important files for the input data.
+4) TRAINED MODELS: has the trained models for the deepCNNs
+
 
 ### Installing
 
