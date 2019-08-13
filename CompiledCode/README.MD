@@ -1,6 +1,10 @@
-# European Master in Engineering Uncertainty Framework
+# Cod Structure
 
-This project is made to satify the requirments of the EMSE (European Master in Software Engineering). The project is divided in several modules. These are the SCOPE_MODEL, RECOGNITION_COMPONENT, QUALITY_MODEL and DATA_PROCESSING. The TSD (Traffic Sign Data) and input data contain important files for the input data.
+This project is made to satify the requirments of the EMSE (European Master in Software Engineering). The project is divided in several modules. These are the 
+1) SCOPE_MODEL
+2) RECOGNITION_COMPONENT 
+3) QUALITY_MODEL
+4) The TSD (Traffic Sign Data) and input data contain important files for the input data.
 
 ### Installing
 
