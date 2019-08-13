@@ -1,4 +1,4 @@
-# Cod Structure
+# Code Structure
 
 This project is made to satify the requirments of the EMSE (European Master in Software Engineering). The project is divided in several modules. These are the 
 1) SCOPE_MODEL
