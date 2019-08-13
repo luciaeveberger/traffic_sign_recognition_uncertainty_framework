@@ -1,7 +1,13 @@
 # Traffic Sign Recognition Framework
 Traffic Sign Recognition Framework Code with Master Thesis by Lucia Eve Berger
 
-# Code: 
+# Organization 
+
+## Design Documentation 
+
+
+
+## Code: 
 
 Code sits in the CompiledCode Folder. There are two modules of interest. The Quality Modelling and the Scope Modelling.
 
